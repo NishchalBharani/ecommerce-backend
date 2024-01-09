@@ -1,20 +1,18 @@
-// connection.js
-const mysql = require('mysql');
+const mariadb = require('mariadb');
 
-const connection = mysql.createConnection({
+const poolConfig = {
   host: 'localhost',
-  user: 'root',
-  password: 'P4ssw0rd!@#1997',
-  database: 'products',
-  port: '3306',
-});
+  user: 'kali',
+  password: 'P4ssw0rd!@#',
+  database: 'ecommerce',
+  port: 3306,
+  connectionLimit: 100,
+  acquireTimeout: 100000,
+  socketPath: '/var/run/mysqld/mysqld.sock',
+};
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-  } else {
-    console.log('Connected to MySQL');
-  }
-});
+console.log("Connection details:", poolConfig);
+
+const connection = mariadb.createPool(poolConfig);
 
 module.exports = connection;

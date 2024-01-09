@@ -1,4 +1,4 @@
-const db = require('./connection'); // Adjust the path based on your actual structure
+const db = require('./connection');
 
 async function getAllCategories() {
   return new Promise((resolve, reject) => {
@@ -8,7 +8,6 @@ async function getAllCategories() {
         return;
       }
 
-      // Parse data, offers, and nowTrending as arrays
       const categories = results.map(category => ({
         ...category,
         data: JSON.parse(category.data),
